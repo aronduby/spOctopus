@@ -1,0 +1,24 @@
+/*
+
+This makes the scrolling a bit more manageable by "pinning" the first column to the left
+  the height aspect of it kind of sucks, but... ya know... tables
+*/
+
+.matrix-container {
+  position: relative;
+}
+
+.matrix-container .overflow-scroll {
+  margin-left: 200px;
+}
+
+.matrix td,
+.matrix th {
+  height: 75px;
+}
+
+table.matrix tr > th:first-child {
+  position: absolute;
+  left: 0;
+  border-bottom: 1px solid #e3e3e3;
+}

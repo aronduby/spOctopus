@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "spOctopus",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": ["https://deploy.salespad.net/*"],
+      "css": ["css/matrix-scrolling.css"],
+      "js": ["assets/jquery/jquery-3.0.0.min.js", "js/matrix-scrolling.js"]
+     }
+  ]
+}
