@@ -1,7 +1,5 @@
 /*
-
 This makes the scrolling a bit more manageable by "pinning" the first column to the left
-  the height aspect of it kind of sucks, but... ya know... tables
 */
 
 .matrix-container {

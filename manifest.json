@@ -5,8 +5,8 @@
   "content_scripts": [
     {
       "matches": ["https://deploy.salespad.net/*"],
-      "css": ["css/matrix-scrolling.css"],
-      "js": ["assets/jquery/jquery-3.0.0.min.js", "js/matrix-scrolling.js"]
+      "css": ["matrix-scrolling/matrix-scrolling.css"],
+      "js": ["assets/jquery/jquery-3.0.0.min.js", "matrix-scrolling/matrix-scrolling.js"]
      }
   ]
 }
