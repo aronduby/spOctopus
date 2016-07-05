@@ -54,9 +54,26 @@
         ]
       },
       {
-        id: 'Whatever',
-        name: 'Whatever',
-        dibs: false
+        id: 'Environments-202',
+        name: 'Frontend_2',
+        dibs: false,
+        projects: [
+          {
+            id: "Projects-2",
+            name: "TestApiServer",
+            dibs : false
+          },
+          {
+            id: "Projects-3",
+            name: "TestAuthServer",
+            dibs : false
+          },
+          {
+            id: "Projects-4",
+            name: "TestWebServer",
+            dibs : false
+          }
+        ]
       },
       {
         id: "Environments-203",
