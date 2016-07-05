@@ -1,18 +1,24 @@
 .dibs--app {
 
   // faking bootstrap styles for the different states
+  .btn {
+    &:hover,
+    &:focus,
+    &:active {
+      color: #fff;
+      outline: none !important;
+    }
+  }
 
   // warning
   .btn-clear{
     &:hover {
       background: #f3aa41;
       border-color: #f19a1f #f19a1f #e38b0e !important;
-      color: #fff;
     }
     &:active {
-      background: #f3a537;
+      background: #f3a537 !important;
       border-color: #f09411 #f09411 #c2770c !important;
-      color: #fff;
     }
   }
 
@@ -21,12 +27,10 @@
     &:hover {
       background: #1a7ab9;
       border-color: #1871ab #1871ab #12547e !important;
-      color: #fff;
     }
     &:active {
       background: #1a7dbd !important;
       border-color: #146090 #146090 #146090 !important;
-      color: #fff;
     }
   }
 
