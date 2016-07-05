@@ -1,0 +1,27 @@
+{
+  "name": "sp-octopus",
+  "version": "1.0.0",
+  "description": "A simple chrome extension for my office's Octopus setup.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aronduby/spOctopus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aronduby/spOctopus/issues"
+  },
+  "homepage": "https://github.com/aronduby/spOctopus#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "socketio": "^1.0.0"
+  }
+}

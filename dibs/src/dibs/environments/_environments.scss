@@ -1,0 +1,58 @@
+.dibs--app {
+
+  dibs-environment {
+    position: relative;
+    padding: .25em 1.5em;
+
+    & + dibs-environment {
+      border-left: 1px solid #e3e3e3;
+    }
+
+
+    > header {
+      cursor: pointer;
+
+      h4 {
+        margin-bottom: .25em;
+      }
+
+      h5 {
+        margin-top: 0;
+      }
+    }
+
+
+    .dibs-environment-popup {
+      position: absolute;
+      display: none;
+      bottom: 60px;
+      left: .75em;
+      width: 310px;
+      background: white;
+      box-shadow: 0 0 2px rgba(0,0,0,.5);
+      z-index: 999;
+
+      > footer {
+        display: flex;
+        border-top: 1px solid #d5d5d5;
+
+        button {
+          flex: 1;
+          border: none;
+          border-radius: 0;
+          padding: .9em;
+          margin-top: 0 !important;
+
+          + button {
+            border-left: 1px solid #d5d5d5;
+          }
+        }
+      }
+    }
+
+    &:hover .dibs-environment-popup {
+      display: block;
+    }
+
+  }
+}

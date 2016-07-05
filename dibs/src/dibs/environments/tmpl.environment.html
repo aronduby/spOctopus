@@ -1,0 +1,20 @@
+<header>
+  <h4>{{ $ctrl.env.name }}</h4>
+  <h5>
+    <status dib="$ctrl.env.dibs"></status>
+  </h5>
+</header>
+
+<section class="dibs-environment-popup">
+
+  <project project="project" ng-repeat="project in $ctrl.env.projects"></project>
+  <div class="empty-project" ng-if="!$ctrl.env.projects.length">
+    <h5>No projects on this environment</h5>
+  </div>
+
+  <footer ng-if="$ctrl.env.projects.length">
+    <button class="btn" ng-click="$ctrl.clear()">Clear All</button>
+    <button class="btn" ng-click="$ctrl.claim()">Claim All</button>
+  </footer>
+
+</section>

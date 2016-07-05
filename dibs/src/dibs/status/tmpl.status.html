@@ -1,0 +1,6 @@
+<status-indicator dib="$ctrl.dib"></status-indicator>
+
+<span class="description" ng-if="$ctrl.dib.full">{{$ctrl.dib.description}}</span>
+<small class="name" ng-if="$ctrl.dib.full">{{$ctrl.dib.name}}</small>
+<span class="description" ng-if="$ctrl.dib.full === false">partially available</span>
+<span class="description" ng-if="!$ctrl.dib">available</span>

@@ -1,0 +1,28 @@
+.dibs--app {
+
+  project + project {
+    display: block;
+    width: 100%;
+    border-top: 1px solid #eee;
+  }
+
+  .dibs-project {
+    display: flex;
+    align-items: center;
+    padding: .5em 1em;
+
+    .project-status {
+      flex: 1 1 60%;
+    }
+
+    .project-buttons {
+      flex: 1 0 auto;
+    }
+  }
+
+  .empty-project {
+    padding: .5em 1em;
+    text-align: center;
+  }
+
+}
