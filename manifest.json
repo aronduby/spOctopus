@@ -3,7 +3,7 @@
   "name": "spOctopus",
   "version": "0.1",
   "web_accessible_resources": [
-    "dibs/dist/all.js"
+    "dibs/loader.js"
   ],
   "content_scripts": [
     {
@@ -24,7 +24,8 @@
         "https://deploy.salespad.net/*"
       ],
       "js": [
-        "dibs/injector.js"
+        "dibs/dist/vendor.min.js",
+        "dibs/dist/app.js"
       ],
       "css": [
         "dibs/dist/app.css"

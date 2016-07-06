@@ -3,9 +3,12 @@
 
   var gulp = require('gulp');
   var concat = require('gulp-concat');
+  var rename = require('gulp-rename');
+  var uglify = require('gulp-uglify');
   var sourcemaps = require('gulp-sourcemaps');
   var templateCache = require('gulp-angular-templatecache');
   var sass = require('gulp-sass');
+  var mainBowerFiles = require('main-bower-files');
 
   var io = require('socket.io');
 
@@ -20,6 +23,14 @@
     io.emit('file.change', {});
   });
 
+  gulp.task('bower', function() {
+    return gulp.src(mainBowerFiles())
+      .pipe(concat('vendor.js'))
+      .pipe(gulp.dest('dibs/dist'))
+      .pipe(rename('vendor.min.js'))
+      .pipe(uglify())
+      .pipe(gulp.dest('dibs/dist'))
+  });
 
   gulp.task('templates', function() {
     return gulp.src('dibs/src/**/*.html')
@@ -35,10 +46,10 @@
       'dibs/src/app.js',
       'dibs/dist/templates.js',
       'dibs/src/**/*.js',
-      'dibs/loader.js'
+      'dibs/injector.js'
     ])
       .pipe(sourcemaps.init())
-      .pipe(concat('all.js'))
+      .pipe(concat('app.js'))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest('dibs/dist'));
   });
@@ -54,12 +65,14 @@
     var reloadWatcher = gulp.watch([
       './manifest.json',
       'dibs/injector.js',
+      'dibs/loader.js',
       'dibs/dist/**/*.*'
     ], ['extension-reload']);
     reloadWatcher.on('change', function(event) {
       console.log('File ' + event.path + ' was ' + event.type + ', reloading extension');
     });
 
+    gulp.watch('bower_components/**/*.*', ['bower']);
     gulp.watch(['dibs/loader.js', 'dibs/src/**/*.js'], ['javascript']);
     gulp.watch('dibs/src/**/*.html', ['javascript']);
     gulp.watch('dibs/**/*.scss', ['sass']);

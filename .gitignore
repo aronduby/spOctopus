@@ -6,3 +6,4 @@
 .idea
 node_modules
 dibs/dist/
+/bower_components/
