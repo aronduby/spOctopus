@@ -2,8 +2,14 @@
   'use strict';
 
   angular.module('dibs', [])
-    .config(function() {
-      console.log(window.spOctopus);
-    })
+    .constant('currentUser', null)
+    .config(config);
 
+  config.$inject = ['$provide', 'environmentsProvider'];
+  function config($provide, environments) {
+
+    $provide.constant('currentUser', window.spOctopus.user);
+    environments.setDashboardData(window.spOctopus.dashboard);
+
+  }
 })();

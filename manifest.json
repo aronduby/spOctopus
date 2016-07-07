@@ -21,7 +21,7 @@
     {
       "run_at": "document_end",
       "matches": [
-        "https://deploy.salespad.net/*"
+        "https://deploy.salespad.net/app*"
       ],
       "js": [
         "dibs/dist/vendor.min.js",

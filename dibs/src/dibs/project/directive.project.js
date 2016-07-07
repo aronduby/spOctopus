@@ -10,7 +10,7 @@
       restrict: 'E',
       templateUrl: 'dibs/project/tmpl.project.html',
       scope: {
-        project: '='
+        item: '='
       },
       controller: ctrl,
       controllerAs: '$ctrl',

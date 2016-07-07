@@ -1,3 +1,9 @@
+#main-wrapper,
+body.no-main-menu #main-wrapper {
+  padding-bottom: 75px !important;
+}
+
+
 .dibs--app {
   position: fixed;
   bottom: 0;

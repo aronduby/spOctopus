@@ -14,10 +14,12 @@
           name: "Brenda",
           description: "ts-3907"
         },
-        projects: [
+        items: [
           {
-            id: "Projects-2",
-            name: "TestApiServer",
+            project: {
+              id: "Projects-2",
+              name: "TestApiServer"
+            },
             dibs : {
               full: true,
               name: "Brenda",
@@ -25,8 +27,10 @@
             }
           },
           {
-            id: "Projects-3",
-            name: "TestAuthServer",
+            project: {
+              id: "Projects-3",
+              name: "TestAuthServer"
+            },
             dibs : {
               full: true,
               name: "Brenda",
@@ -34,8 +38,10 @@
             }
           },
           {
-            id: "Projects-41",
-            name: "TestPosServer",
+            project: {
+              id: "Projects-41",
+              name: "TestPosServer"
+            },
             dibs : {
               full: true,
               name: "Brenda",
@@ -43,8 +49,10 @@
             }
           },
           {
-            id: "Projects-4",
-            name: "TestWebServer",
+            project: {
+              id: "Projects-4",
+              name: "TestWebServer"
+            },
             dibs : {
               full: true,
               name: "Brenda",
@@ -57,20 +65,26 @@
         id: 'Environments-202',
         name: 'Frontend_2',
         dibs: false,
-        projects: [
+        items: [
           {
-            id: "Projects-2",
-            name: "TestApiServer",
+            project: {
+              id: "Projects-2",
+              name: "TestApiServer"
+            },
             dibs : false
           },
           {
-            id: "Projects-3",
-            name: "TestAuthServer",
+            project: {
+              id: "Projects-3",
+              name: "TestAuthServer"
+            },
             dibs : false
           },
           {
-            id: "Projects-4",
-            name: "TestWebServer",
+            project: {
+              id: "Projects-4",
+              name: "TestWebServer"
+            },
             dibs : false
           }
         ]
@@ -81,10 +95,12 @@
         dibs: {
           full: false
         },
-        projects: [
+        items: [
           {
-            id: "Projects-2",
-            name: "TestApiServer",
+            project: {
+              id: "Projects-2",
+              name: "TestApiServer"
+            },
             dibs : {
               full: true,
               name: "Austin",
@@ -92,8 +108,10 @@
             }
           },
           {
-            id: "Projects-3",
-            name: "TestAuthServer",
+            project: {
+              id: "Projects-3",
+              name: "TestAuthServer",
+            },
             dibs : {
               full: true,
               name: "Austin",
@@ -101,8 +119,10 @@
             }
           },
           {
-            id: "Projects-4",
-            name: "TestWebServer",
+            project: {
+              id: "Projects-4",
+              name: "TestWebServer"
+            },
             dibs : false
           }
         ]
