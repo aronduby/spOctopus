@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "A simple chrome extension for my office's Octopus setup.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aronduby/spOctopus.git"
@@ -28,5 +25,10 @@
     "gulp-uglify": "^1.5.4",
     "main-bower-files": "^2.13.1",
     "socketio": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm run bowerinstall",
+    "bowerinstall": "bower install"
   }
 }
