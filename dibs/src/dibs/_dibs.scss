@@ -3,22 +3,35 @@
   dibs {
     display: flex;
     align-items: stretch;
+    min-height: 60px;
 
-    header.icon {
+    > header,
+    > dibs-settings {
       display: flex;
+      flex: 0;
       align-items: center;
+      padding: 0 .5em;
+      border-color: #e3e3e3;
+    }
+
+    > header.icon {
+      color: #808080;
       font-size: 14px;
       font-weight: 900;
       text-transform: uppercase;
-      color: #808080;
-      padding: 0 .5em;
       border-right: 1px solid #e3e3e3;
     }
   }
 
   .dibs-environments-holder {
     display: flex;
+    align-items: center;
+    flex: 1;
     overflow: hidden;
+
+    .text-muted {
+      margin-left: 1em;
+    }
   }
 
 

@@ -1,6 +1,10 @@
 <header class="icon">
   <span>dibs</span>
 </header>
+
 <div class="dibs-environments-holder">
-  <environment ng-repeat="env in $ctrl.environments" env="env"></environment>
+  <environment ng-repeat="env in filtered = ($ctrl.environments | filter:$ctrl.filterHidden)" env="env"></environment>
+  <div ng-if="!filtered.length" class="text-muted">No Environments Selected</div>
 </div>
+
+<dibs-settings></dibs-settings>

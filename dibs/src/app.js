@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('dibs', [])
+  angular.module('dibs', ['ngStorage'])
     .constant('currentUser', null)
     .config(config);
 

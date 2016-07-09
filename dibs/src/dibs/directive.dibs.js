@@ -4,8 +4,8 @@
   angular.module('dibs')
     .directive('dibs', directive);
 
-  directive.$inject = ['environments', 'currentUser'];
-  function directive(environments, currentUser) {
+  directive.$inject = ['environments', 'hiddenEnvironments'];
+  function directive(environments, hiddenEnvironments) {
     return {
       templateUrl: 'dibs/tmpl.dibs.html',
       controller: ctrl,
@@ -14,8 +14,12 @@
     };
 
     function ctrl() {
-      console.log(currentUser);
       this.environments = environments.all;
+      this.filterHidden = filterHidden;
+
+      function filterHidden(env) {
+        return !(_.indexOf(hiddenEnvironments.hidden, env.Id) >= 0);
+      }
     }
 
     function link() {

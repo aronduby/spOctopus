@@ -1,0 +1,26 @@
+<header>
+  <i class="fa fa-cog"></i>
+</header>
+
+<section class="dibs-settings-popup dibs-popup">
+  <section>
+    <ul class="dibs-environments-list">
+      <li ng-repeat="env in filteredEnvs = ($ctrl.environments | filter:filter)">
+        <label>
+          <input type="checkbox"
+                 ng-model="$ctrl.checked[env.Id]"
+                 ng-change="$ctrl.sync($ctrl.checked[env.Id], env.Id)">
+          {{env.Name}}
+        </label>
+      </li>
+      <li ng-if="!filteredEnvs.length" class="text-muted"><label>No environments found</label></li>
+    </ul>
+
+    <input type="search" ng-model="filter" placeholder="search" class="form-control">
+
+    <footer ng-if="$ctrl.environments.length">
+      <button class="btn btn-warning--hover" ng-click="$ctrl.hideAll()">Hide All</button>
+      <button class="btn btn-primary--hover" ng-click="$ctrl.showAll()">Show All</button>
+    </footer>
+  </section>
+</section>

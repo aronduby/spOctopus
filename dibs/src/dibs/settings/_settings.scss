@@ -1,0 +1,64 @@
+.dibs--app {
+
+  dibs-settings {
+    border-left: 1px solid;
+
+    > header {
+      cursor: pointer;
+      font-size: 18px;
+      color: #808080;
+    }
+
+    .dibs-popup {
+      margin-left: 0;
+      right: 0;
+
+      section {
+        display: flex;
+        flex-direction: column;
+
+        .dibs-environments-list {
+          flex: 1 0 auto;
+          max-height: 350px;
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          overflow: auto;
+
+          li {
+            border-left: 0;
+            border-right: 0;
+
+            & + li {
+              border-top: 1px solid #eee;
+            }
+
+            label {
+              display: block;
+              font-size: 1.1em;
+              font-weight: normal;
+              padding: .75em 1em;
+              cursor: pointer;
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        input.form-control {
+          border: none;
+          border-top: 1px solid #d5d5d5;
+          border-radius: 0;
+        }
+
+        footer {
+          flex: 0;
+        }
+      }
+    }
+
+    &:hover > .dibs-popup {
+      display: block;
+    }
+  }
+
+}
