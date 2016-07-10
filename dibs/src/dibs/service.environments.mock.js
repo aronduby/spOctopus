@@ -2,128 +2,140 @@
   'use strict';
 
   angular.module('dibs')
-    .service('environmentsServiceMock', environments);
+    .provider('environmentsMock', environmentsProvider);
 
-  function environments() {
+  function environmentsProvider() {
+    var dashboardData = null;
+    this.setDashboardData = function(data) {
+      dashboardData = data;
+    };
+
+
+    this.$get = function() {
+      return new Environments();
+    };
+  }
+
+  function Environments() {
     this.all = [
       {
-        id: "Environments-201",
-        name: "Frontend_1",
-        dibs : {
-          full: true,
-          name: "Brenda",
-          description: "ts-3907"
+        Id: "Environments-201",
+        Name: "Frontend_1",
+        Dibs : {
+          Full: true,
+          Name: "Brenda",
+          Description: "ts-3907"
         },
-        items: [
+        Items: [
           {
-            project: {
-              id: "Projects-2",
-              name: "TestApiServer"
+            Project: {
+              Id: "Projects-2",
+              Name: "TestApiServer"
             },
-            dibs : {
-              full: true,
-              name: "Brenda",
-              description: "ts-3907"
+            Dibs : {
+              Full: true,
+              Name: "Brenda",
+              Description: "ts-3907"
             }
           },
           {
-            project: {
-              id: "Projects-3",
-              name: "TestAuthServer"
+            Project: {
+              Id: "Projects-3",
+              Name: "TestAuthServer"
             },
-            dibs : {
-              full: true,
-              name: "Brenda",
-              description: "ts-3907"
+            Dibs : {
+              Full: true,
+              Name: "Brenda",
+              Description: "ts-3907"
             }
           },
           {
-            project: {
-              id: "Projects-41",
-              name: "TestPosServer"
+            Project: {
+              Id: "Projects-41",
+              Name: "TestPosServer"
             },
-            dibs : {
-              full: true,
-              name: "Brenda",
-              description: "ts-3907"
+            Dibs : {
+              Full: true,
+              Name: "Brenda",
+              Description: "ts-3907"
             }
           },
           {
-            project: {
-              id: "Projects-4",
-              name: "TestWebServer"
+            Project: {
+              Id: "Projects-4",
+              Name: "TestWebServer"
             },
-            dibs : {
-              full: true,
-              name: "Brenda",
-              description: "ts-3907"
+            Dibs : {
+              Full: true,
+              Name: "Brenda",
+              Description: "ts-3907"
             }
           }
         ]
       },
       {
-        id: 'Environments-202',
-        name: 'Frontend_2',
-        dibs: false,
-        items: [
+        Id: 'Environments-202',
+        Name: 'Frontend_2',
+        Dibs: false,
+        Items: [
           {
-            project: {
-              id: "Projects-2",
-              name: "TestApiServer"
+            Project: {
+              Id: "Projects-2",
+              Name: "TestApiServer"
             },
-            dibs : false
+            Dibs : false
           },
           {
-            project: {
-              id: "Projects-3",
-              name: "TestAuthServer"
+            Project: {
+              Id: "Projects-3",
+              Name: "TestAuthServer"
             },
-            dibs : false
+            Dibs : false
           },
           {
-            project: {
-              id: "Projects-4",
-              name: "TestWebServer"
+            Project: {
+              Id: "Projects-4",
+              Name: "TestWebServer"
             },
-            dibs : false
+            Dibs : false
           }
         ]
       },
       {
-        id: "Environments-203",
-        name: "Frontend_3",
-        dibs: {
-          full: false
+        Id: "Environments-203",
+        Name: "Frontend_3",
+        Dibs: {
+          Full: false
         },
-        items: [
+        Items: [
           {
-            project: {
-              id: "Projects-2",
-              name: "TestApiServer"
+            Project: {
+              Id: "Projects-2",
+              Name: "TestApiServer"
             },
-            dibs : {
-              full: true,
-              name: "Austin",
-              description: "Dropship"
+            Dibs : {
+              Full: true,
+              Name: "Austin",
+              Description: "Dropship"
             }
           },
           {
-            project: {
-              id: "Projects-3",
-              name: "TestAuthServer",
+            Project: {
+              Id: "Projects-3",
+              Name: "TestAuthServer",
             },
-            dibs : {
-              full: true,
-              name: "Austin",
-              description: "Dropship"
+            Dibs : {
+              Full: true,
+              Name: "Austin",
+              Description: "Dropship"
             }
           },
           {
-            project: {
-              id: "Projects-4",
-              name: "TestWebServer"
+            Project: {
+              Id: "Projects-4",
+              Name: "TestWebServer"
             },
-            dibs : false
+            Dibs : false
           }
         ]
       }

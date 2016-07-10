@@ -4,8 +4,8 @@
   angular.module('dibs')
     .directive('environment', directive);
 
-  directive.$inject = [];
-  function directive() {
+  directive.$inject = ['dibsPrompt', 'dibsService'];
+  function directive(dibsPrompt, dibsService) {
     return {
       restrict: 'E',
       templateUrl: 'dibs/environments/tmpl.environment.html',
@@ -18,25 +18,46 @@
       link: link
     };
 
-    function ctrl() {}
+    function ctrl() {
+      var self = this;
+
+      this.clearAll = clearAll;
+      this.claimAll = claimAll;
+
+      function clearAll() {
+        dibsService.clear(getAll());
+      }
+
+      function claimAll() {
+        dibsPrompt("What are you working on?")
+          .then(function(description) {
+            dibsService.claim(getAll({'Description': description}));
+          })
+      }
+
+      function getAll(additional) {
+        return _.map(self.env.Items, function(item) {
+          return _(item)
+            .pick(['EnvironmentId', 'ProjectId'])
+            .assign(additional)
+            .value();
+        })
+      }
+    }
 
     function link(scope, el, attr) {
       el.on('mouseover', function() {
         var left = offset(el[0]).left;
         el.find('section').css('left', left+'px');
-      })
+      });
+
+      attr.$set('data-Id', scope.$ctrl.env.Id);
     }
   }
 
 
   function offset( elem, options ) {
-    //...
-
     var docElem, win, rect, doc;
-
-    if ( !elem ) {
-      return;
-    }
 
     rect = elem.getBoundingClientRect();
 

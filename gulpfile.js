@@ -24,7 +24,10 @@
   });
 
   gulp.task('bower', function() {
-    return gulp.src(mainBowerFiles())
+    var src = mainBowerFiles();
+    src.push('./node_modules/socket.io-client/socket.io.js');
+
+    return gulp.src(src)
       .pipe(concat('vendor.js'))
       .pipe(gulp.dest('dibs/dist'))
       .pipe(rename('vendor.min.js'))
@@ -46,6 +49,7 @@
       'dibs/src/app.js',
       'dibs/dist/templates.js',
       'dibs/src/**/*.js',
+      'dibs/socket.js',
       'dibs/injector.js'
     ])
       .pipe(sourcemaps.init())
@@ -73,7 +77,7 @@
     });
 
     gulp.watch('bower_components/**/*.*', ['bower']);
-    gulp.watch(['dibs/loader.js', 'dibs/src/**/*.js'], ['javascript']);
+    gulp.watch(['dibs/loader.js', 'dibs/socket.js', 'dibs/src/**/*.js'], ['javascript']);
     gulp.watch('dibs/src/**/*.html', ['javascript']);
     gulp.watch('dibs/**/*.scss', ['sass']);
   });

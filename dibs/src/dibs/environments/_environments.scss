@@ -2,6 +2,7 @@
 
   environment {
     padding: .25em 1.5em;
+    max-width: 200px;
 
     & + environment {
       border-left: 1px solid #e3e3e3;

@@ -1,15 +1,26 @@
 (function() {
   'use strict';
 
-  var s = document.createElement('script');
-  s.src = chrome.extension.getURL('dibs/loader.js');
-  (document.head || document.documentElement).appendChild(s);
-  s.onload = function() {
-    s.parentNode.removeChild(s);
-  };
+  var octopusLoaded = false;
+  var socketLoaded = false;
+  var appRoot = null;
+  var nonBinding = null;
 
-  window.addEventListener("message", function(event) {
-    if (event.source != window)
+  var scripts = ['dibs/loader.js'];
+  scripts.forEach(function(path) {
+    var s = document.createElement('script');
+    s.src = chrome.extension.getURL(path);
+    (document.head || document.documentElement).appendChild(s);
+    s.onload = function() {
+      s.parentNode.removeChild(s);
+    };
+  });
+
+  window.addEventListener("message", setupDOM, false);
+  prepareSocket().then(setupSocket);
+
+  function setupDOM(event) {
+    if(event.source != window)
       return;
 
     window.spOctopus = event.data;
@@ -18,25 +29,36 @@
 
     // Create a non-bindable wrapper for the root element
     // to keep the page's Angular instance away
-    var div = document.createElement('div');
-    div.dataset.ngNonBindable = '';
+    nonBinding = document.createElement('div');
+    nonBinding.dataset.ngNonBindable = '';
 
     // Create the app's root element (everything else should go in here)
-    var appRoot = document.createElement('div');
+    appRoot = document.createElement('div');
     appRoot.dataset.ngApp = 'dibs';
     appRoot.className = 'dibs--app';
 
     var dibs = document.createElement('dibs');
+    var dibsLoading = document.createTextNode('Loading - if this never goes away something is wrong');
+    dibs.appendChild(dibsLoading);
     appRoot.appendChild(dibs);
+    nonBinding.appendChild(appRoot);
 
-    // Insert elements into the DOM
-    document.body.appendChild(div);
-    div.appendChild(appRoot);
+    octopusLoaded = true;
+    bootstrap();
+  }
 
-    /* Manually bootstrap the Angular app */
-    window.name = '';   // To allow `bootstrap()` to continue normally
-    angular.bootstrap(appRoot, ['dibs']);
-    
-  }, false);
+  function setupSocket(socket) {
+    socketLoaded = true;
+    bootstrap();
+  }
+
+  function bootstrap() {
+    if (octopusLoaded && socketLoaded) {
+      /* Manually bootstrap the Angular app */
+      document.body.appendChild(nonBinding);
+      window.name = '';   // To allow `bootstrap()` to continue normally
+      angular.bootstrap(appRoot, ['dibs']);
+    }
+  }
 
 })();
