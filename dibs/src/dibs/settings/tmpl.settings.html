@@ -5,7 +5,7 @@
 <section class="dibs-settings-popup dibs-popup">
   <section>
     <ul class="dibs-environments-list">
-      <li ng-repeat="env in filteredEnvs = ($ctrl.environments | filter:filter)">
+      <li ng-repeat="env in filteredEnvs = ($ctrl.environments | filter:$ctrl.nameFilter(filter))">
         <label>
           <input type="checkbox"
                  ng-model="$ctrl.checked[env.Id]"

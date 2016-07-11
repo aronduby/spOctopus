@@ -21,6 +21,7 @@
       this.environments = environments.all;
       this.checked = {};
 
+      this.nameFilter = nameFilter;
       this.sync = sync;
       this.hideAll = hideAll;
       this.showAll = showAll;
@@ -31,6 +32,12 @@
         _.forEach(self.environments, function(env) {
           self.checked[env.Id] = !isHidden(env.Id);
         });
+      }
+
+      function nameFilter(q) {
+        return function(item) {
+          return !q || _.includes(item.Name.toUpperCase(), q.toUpperCase());
+        }
       }
 
       function isHidden(envId) {
