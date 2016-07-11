@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>spOctopus Settings</title>
+
+  <style>
+    input {
+      box-sizing: border-box;
+      margin-bottom: 0;
+    }
+
+    .form-group {
+      margin-bottom: 1em;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: .25em;
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: .5em;
+    }
+
+    .form-control.error {
+      box-shadow: 0 0 2px red;
+      background: #fee;
+      border-color: red;
+    }
+
+    .form-control.error:focus {
+      border-color: red;
+    }
+
+    .help-text {
+      margin-top: 0;
+      color: #808080;
+    }
+
+    .save-message {
+      background: #1da91d;
+      color: white;
+      padding: .5em 1em;
+      display: none;
+    }
+      .save-message p {
+        margin: 0;
+      }
+
+    form footer {
+      text-align: right;
+      margin-top: 1em;
+    }
+
+  </style>
+</head>
+<body>
+  <form>
+    <div class="form-group">
+      <label for="dibsServer">Dibs Server</label>
+      <input class="form-control" type="url" name="dibsServer" id="dibsServer" />
+      <p class="help-text">The url to your dibs server. Needs to be secure (https:// or wss://).</p>
+    </div>
+
+    <div class="save-message" id="saveMessage">
+      <p>Your options have been saved.</p>
+    </div>
+
+    <footer>
+      <input type="submit" id="save" class="btn btn-primary" value="Save">
+    </footer>
+
+  </form>
+
+  <script src="options.js"></script>
+</body>
+</html>

@@ -70,7 +70,8 @@
       './manifest.json',
       'dibs/injector.js',
       'dibs/loader.js',
-      'dibs/dist/**/*.*'
+      'dibs/dist/**/*.*',
+      'options/**/*.*'
     ], ['extension-reload']);
     reloadWatcher.on('change', function(event) {
       console.log('File ' + event.path + ' was ' + event.type + ', reloading extension');
