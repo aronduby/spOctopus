@@ -4,15 +4,16 @@
   angular.module('dibs')
     .directive('dibsSettings', settings);
 
-  settings.$inject = ['environments', 'hiddenEnvironments'];
-  function settings(environments, hiddenEnvironments) {
+  settings.$inject = ['environments', 'hiddenEnvironments', 'getOffset'];
+  function settings(environments, hiddenEnvironments, getOffset) {
     return {
       restrict: 'E',
       templateUrl: 'dibs/settings/tmpl.settings.html',
       scope: {},
       controller: settingsCtrl,
       controllerAs: '$ctrl',
-      bindToController: true
+      bindToController: true,
+      link: link
     };
 
     function settingsCtrl() {
@@ -63,6 +64,15 @@
         hiddenEnvironments.hidden = [];
         createChecked();
       }
+    }
+
+    function link(scope, el, attrs) {
+      var popup = el.find('section');
+
+      el.on('mouseenter', function() {
+        var offset = getOffset(el[0]);
+        popup.css('bottom', offset.height + 'px');
+      });
     }
   }
 

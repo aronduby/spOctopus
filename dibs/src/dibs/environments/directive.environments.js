@@ -4,8 +4,8 @@
   angular.module('dibs')
     .directive('environment', directive);
 
-  directive.$inject = ['dibsPrompt', 'dibsService'];
-  function directive(dibsPrompt, dibsService) {
+  directive.$inject = ['dibsPrompt', 'dibsService', 'getOffset'];
+  function directive(dibsPrompt, dibsService, getOffset) {
     return {
       restrict: 'E',
       templateUrl: 'dibs/environments/tmpl.environment.html',
@@ -46,31 +46,25 @@
     }
 
     function link(scope, el, attr) {
-      el.on('mouseover', function() {
-        var left = offset(el[0]).left;
-        el.find('section').css('left', left+'px');
+      var popup = el.find('section');
+
+      el.on('mouseenter', function() {
+        var elOffset = getOffset(el[0]);
+        var popupOffset = getOffset(popup[0]);
+
+        var left = (elOffset.left + elOffset.width/2 ) - popupOffset.width / 2;
+        left = Math.max(0, left);
+        if ((left + popupOffset.width /2) > document.body.clientWidth) {
+          left = document.body.clientWidth - popupOffset.width / 2;
+        }
+
+        popup.css({
+          'left': left + 'px',
+          'bottom': elOffset.height + 'px'
+        });
       });
 
       attr.$set('data-Id', scope.$ctrl.env.Id);
-    }
-  }
-
-
-  function offset( elem, options ) {
-    var docElem, win, rect, doc;
-
-    rect = elem.getBoundingClientRect();
-
-    // Make sure element is not hidden (display: none) or disconnected
-    if ( rect.width || rect.height || elem.getClientRects().length ) {
-      doc = elem.ownerDocument;
-      win = window;
-      docElem = doc.documentElement;
-
-      return {
-        top: rect.top + win.pageYOffset - docElem.clientTop,
-        left: rect.left + win.pageXOffset - docElem.clientLeft
-      };
     }
   }
 
