@@ -68,7 +68,6 @@
   gulp.task('watch', function() {
     var reloadWatcher = gulp.watch([
       './manifest.json',
-      'dibs/injector.js',
       'dibs/loader.js',
       'dibs/dist/**/*.*',
       'options/**/*.*'
@@ -78,7 +77,7 @@
     });
 
     gulp.watch('bower_components/**/*.*', ['bower']);
-    gulp.watch(['dibs/loader.js', 'dibs/socket.js', 'dibs/src/**/*.js'], ['javascript']);
+    gulp.watch(['dibs/loader.js', 'dibs/injector.js', 'dibs/socket.js', 'dibs/src/**/*.js'], ['javascript']);
     gulp.watch('dibs/src/**/*.html', ['javascript']);
     gulp.watch('dibs/**/*.scss', ['sass']);
   });

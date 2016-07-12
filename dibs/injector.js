@@ -37,10 +37,13 @@
     appRoot.dataset.ngApp = 'dibs';
     appRoot.className = 'dibs--app';
 
-    var dibs = document.createElement('dibs');
-    var dibsLoading = document.createTextNode('Loading - if this never goes away something is wrong');
-    dibs.appendChild(dibsLoading);
-    appRoot.appendChild(dibs);
+    // var dibs = document.createElement('dibs');
+    // var dibsLoading = document.createTextNode('Loading - if this never goes away something is wrong');
+    // dibs.appendChild(dibsLoading);
+    // appRoot.appendChild(dibs);
+    var view = document.createElement('div');
+    view.setAttribute('ui-view', '');
+    appRoot.appendChild(view);
     nonBinding.appendChild(appRoot);
 
     octopusLoaded = true;
