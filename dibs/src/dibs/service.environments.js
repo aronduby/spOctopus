@@ -8,7 +8,6 @@
     var dashboardData = null;
     this.setDashboardData = function(data) {
       dashboardData = data;
-      console.log(data);
     };
 
     this.$get = getter;

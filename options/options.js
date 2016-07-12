@@ -6,7 +6,7 @@
 
   function validateServerUrl() {
     saveMessage.style.display = 'none';
-    
+
     if (dibsServer.value.indexOf('https://') !== 0 &&
         dibsServer.value.indexOf('wss://') !== 0
     ) {
@@ -20,7 +20,7 @@
 
   function loadData() {
     chrome.storage.sync.get({
-      dibsServer: 'https://localhost:789'
+      dibsServer: 'https://localhost:789/dibs'
     }, function(items) {
       dibsServer.value = items.dibsServer;
     });

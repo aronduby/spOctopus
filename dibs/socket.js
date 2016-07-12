@@ -1,17 +1,16 @@
-function prepareSocket(){
+function prepareSocket() {
 
   /*
    *	The actual connection to the socket server
    *	Using a deferred style here to be able to trigger the angular bootstrap
    */
-  var address = 'https://localhost:789/dibs',
-      options = {
-        'sync disconnect on unload': true,
-        'max reconnection attempts': 5,
-        'secure': true
-      };
+  var options = {
+    'sync disconnect on unload': true,
+    'max reconnection attempts': 5,
+    'secure': true
+  };
 
-  var socket = io.connect(address, options);
+  var socket;
 
   // quick slap together a defer
   var promise = {
@@ -19,15 +18,15 @@ function prepareSocket(){
     koCallbacks: [],
     status: null,
     data: null,
-    then: function(okCallback){
-      if(this.status == 'resolved'){
+    then: function(okCallback) {
+      if (this.status == 'resolved') {
         okCallback(this.data);
       } else {
         this.okCallbacks.push(okCallback);
       }
     },
-    fail: function(koCallback){
-      if(this.status == 'rejected'){
+    fail: function(koCallback) {
+      if (this.status == 'rejected') {
         koCallback(this.data);
       } else {
         this.koCallbacks.push(koCallback);
@@ -37,28 +36,48 @@ function prepareSocket(){
 
   var defer = {
     promise: promise,
-    resolve: function(data){
+    resolve: function(data) {
       this.promise.status = 'resolved';
       this.promise.data = data;
-      this.promise.okCallbacks.forEach(function(callback){
-        window.setTimeout(function(){
+      this.promise.okCallbacks.forEach(function(callback) {
+        window.setTimeout(function() {
           callback(data);
         }, 0)
       });
+      this.promise.okCallbacks = [];
     },
-    reject: function(err){
+    reject: function(err) {
       this.promise.status = 'rejected';
       this.promise.data = data;
-      this.promise.koCallbacks.forEach(function(callback){
-        window.setTimeout(function(){
+      this.promise.koCallbacks.forEach(function(callback) {
+        window.setTimeout(function() {
           callback(err);
         }, 0);
       });
     }
   };
 
-  socket.on('connect', function(){
-    defer.resolve(socket);
+  function connect(address, options) {
+    socket = io.connect(address, options);
+    socket.on('connect', function() {
+      defer.resolve(socket);
+    });
+  }
+
+  chrome.storage.sync.get('dibsServer', function(data) {
+    if (!data.dibsServer) {
+      return alert('No dibs server setup for spOctopus. Please visit the options page.');
+    }
+
+    connect(data.dibsServer, options);
+  });
+
+  // watch for changes to the dibsServer storage
+  chrome.storage.onChanged.addListener(function(changes, namespace) {
+    var change = changes['dibsServer'];
+    if (change.newValue !== change.oldValue) {
+      connect(change.newValue, options);
+    }
   });
 
 
@@ -76,26 +95,26 @@ function prepareSocket(){
 
    // this will bind it to the scope and clear on destroy
    socket.addScope($scope)
-     .on('score.new', updateScore)
-     .on('score.update', updateScore)
-     .on('score.delete', deleteScore)
-     .on('reconnect', function(){
-      loadTournament($scope.current_tournament.id);
-     });
+   .on('score.new', updateScore)
+   .on('score.update', updateScore)
+   .on('score.delete', deleteScore)
+   .on('reconnect', function(){
+   loadTournament($scope.current_tournament.id);
+   });
 
    // used within servers
    socket.on('event', listener);
    socket.emit('even', [data], callback);
    */
-  function Socket($rootScope){
+  function Socket($rootScope) {
     var scopes = {};
 
     this.emit = function() {
       var args = Array.prototype.slice.call(arguments);
-      if(args.length<=0)
+      if (args.length <= 0)
         return;
-      var responseHandler = args[args.length-1];
-      if(angular.isFunction(responseHandler)) {
+      var responseHandler = args[args.length - 1];
+      if (angular.isFunction(responseHandler)) {
         responseHandler = wrapHandler(responseHandler);
       } else {
         args.push(_.noop);
@@ -109,25 +128,25 @@ function prepareSocket(){
       return this;
     };
 
-    this.addScope = function(angular_scope){
+    this.addScope = function(angular_scope) {
       var scope = new Scope(angular_scope.$id);
 
-      angular_scope.$on('$destroy', function(){
+      angular_scope.$on('$destroy', function() {
         scope.clear();
       });
 
       return scope;
     };
 
-    this.getScope = function(id){
-      if(scopes[id]){
+    this.getScope = function(id) {
+      if (scopes[id]) {
         return scopes[id];
       } else {
         return false;
       }
     };
 
-    this.getSocket = function(){
+    this.getSocket = function() {
       return socket;
     };
 
@@ -136,14 +155,14 @@ function prepareSocket(){
      *	Create scoped objects which correspond to controllers scopes
      *	this allows us to easily remove events for a controllers scope when it gets destroyed
      */
-    function Scope(id){
+    function Scope(id) {
       this.id = id;
       this.events = {};
       scopes[id] = this;
     }
 
-    Scope.prototype.on = function(e, handler){
-      if(this.events[e] == undefined){
+    Scope.prototype.on = function(e, handler) {
+      if (this.events[e] == undefined) {
         this.events[e] = [];
       }
       var wrapped_handler = wrapHandler(handler);
@@ -152,14 +171,14 @@ function prepareSocket(){
       return this;
     };
 
-    Scope.prototype.clear = function(){
+    Scope.prototype.clear = function() {
       // loop through all of our events and removeListener
       var keys = Object.keys(this.events);
-      for(var i=0; i<keys.length; ++i){
-        var e = keys[i],
+      for(var i = 0; i < keys.length; ++i) {
+        var e        = keys[i],
             handlers = this.events[e];
 
-        for(var j=0; j<handlers.length; ++j){
+        for(var j = 0; j < handlers.length; ++j) {
           socket.removeListener(e, handlers[j]);
         }
       }
@@ -171,7 +190,7 @@ function prepareSocket(){
      *	use the bare handler, so this function will wrap the supplied handler with the proper Angular
      *	code and return that function, which can be stored and used with removeListener
      */
-    function wrapHandler(handler){
+    function wrapHandler(handler) {
       return function() {
         var args = arguments;
         $rootScope.$apply(function() {
@@ -184,13 +203,12 @@ function prepareSocket(){
      *	This actually adds the event listener to the socket. Make sure the handler has already been
      *	wraped using the wrapHandler() function above
      */
-    function addListener(e, wrapped_handler){
+    function addListener(e, wrapped_handler) {
       socket.on(e, wrapped_handler);
     }
   }
 
   servicesApp.service('socket', ['$rootScope', Socket]);
-
 
 
   // finally return our promise from above so we can trigger things to happen once we are connected
