@@ -70,7 +70,8 @@
       './manifest.json',
       'dibs/loader.js',
       'dibs/dist/**/*.*',
-      'options/**/*.*'
+      'options/**/*.*',
+      'matrix-scrolling/**/*.*'
     ], ['extension-reload']);
     reloadWatcher.on('change', function(event) {
       console.log('File ' + event.path + ' was ' + event.type + ', reloading extension');

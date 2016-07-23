@@ -75,7 +75,7 @@ function prepareSocket() {
   // watch for changes to the dibsServer storage
   chrome.storage.onChanged.addListener(function(changes, namespace) {
     var change = changes['dibsServer'];
-    if (change.newValue !== change.oldValue) {
+    if (change && change.newValue !== change.oldValue) {
       connect(change.newValue, options);
     }
   });

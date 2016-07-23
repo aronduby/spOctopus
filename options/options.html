@@ -20,6 +20,12 @@
       margin-bottom: .25em;
     }
 
+    .checkbox-group label {
+      display: inline-block;
+      position: relative;
+      top: 2px;
+    }
+
     .form-control {
       display: block;
       width: 100%;
@@ -39,6 +45,7 @@
     .help-text {
       margin-top: 0;
       color: #808080;
+      line-height: 1.4em;
     }
 
     .save-message {
@@ -64,6 +71,12 @@
       <label for="dibsServer">Dibs Server</label>
       <input class="form-control" type="url" name="dibsServer" id="dibsServer" />
       <p class="help-text">The url to your dibs server. Needs to be secure (https:// or wss://).</p>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <input class="" type="checkbox" name="enableScrollMapping" id="enableScrollMapping" />
+      <label for="enableScrollMapping">Enable Scroll Mapping</label>
+      <p class="help-text">Map vertical scrolling on the mouse wheel to horizontal scrolling while hovering over environment tables?</p>
     </div>
 
     <div class="save-message" id="saveMessage">

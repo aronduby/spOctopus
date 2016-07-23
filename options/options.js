@@ -1,6 +1,7 @@
-(function() {
+// (function() {
 
   var dibsServer = document.getElementById('dibsServer');
+  var enableScrollMapping = document.getElementById('enableScrollMapping');
   var save = document.getElementById('save');
   var saveMessage = document.getElementById('saveMessage');
 
@@ -20,9 +21,11 @@
 
   function loadData() {
     chrome.storage.sync.get({
-      dibsServer: 'https://localhost:789/dibs'
+      dibsServer: 'https://grpl.info:789/dibs',
+      enableScrollMapping: true
     }, function(items) {
       dibsServer.value = items.dibsServer;
+      enableScrollMapping.checked = items.enableScrollMapping;
     });
   }
 
@@ -30,7 +33,8 @@
     e.preventDefault();
     if (!dibsServer.classList.contains('error')) {
       chrome.storage.sync.set({
-        dibsServer: dibsServer.value
+        dibsServer: dibsServer.value,
+        enableScrollMapping: enableScrollMapping.checked
       }, function() {
         saveMessage.style.display = 'block';
         save.disabled = true;
@@ -44,4 +48,4 @@
   save.addEventListener("click", saveData);
   dibsServer.addEventListener("input", validateServerUrl);
 
-})();
+// })();
