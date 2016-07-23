@@ -92,16 +92,25 @@
           env.Dibs = false;
         } else {
           var envDib = {};
-          var descriptions = _(dibs).map('Description').uniq().value();
 
-          // if there's more than one unique description, it's not full
-          if (descriptions.length > 1) {
-            envDib.Full = false;
+          if (_.every(dibs)) {
+            var descriptions = _(dibs).map('Description').uniq().value();
+            if (descriptions.length > 1) {
+              _.assign(envDib, {
+                Full: true,
+                Description: 'Multiple Dibs',
+                Name: null
+              });
+            } else {
+              _.assign(envDib, {
+                Full: true,
+                Description: descriptions[0],
+                Name: dibs[0].Name
+              });
+            }
           } else {
             _.assign(envDib, {
-              Full: true,
-              Description: descriptions[0],
-              Name: dibs[0].Name
+              Full: false
             });
           }
 
