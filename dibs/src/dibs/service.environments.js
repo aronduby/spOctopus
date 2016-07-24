@@ -56,6 +56,10 @@
       function getAllDibsHandler(dibs) {
         _.forEach(dibs, function(dib) {
           var item = _.find(items, _.pick(dib, ['EnvironmentId', 'ProjectId']));
+          if (dib.Created_At) {
+            dib.Created_At = new Date(dib.Created_At);
+          }
+
           if (item) {
             item.Dibs = dib;
           }
@@ -67,6 +71,9 @@
       function claim(dibs) {
         _.forEach(dibs, function(dib) {
           var item = _(items).filter({'EnvironmentId': dib.EnvironmentId, 'ProjectId': dib.ProjectId}).head();
+          if (dib.Created_At) {
+            dib.Created_At = new Date(dib.Created_At);
+          }
           if (item) {
             item.Dibs = dib;
             setEnvDibs(item.Environment);
@@ -105,7 +112,8 @@
               _.assign(envDib, {
                 Full: true,
                 Description: descriptions[0],
-                Name: dibs[0].Name
+                Name: dibs[0].Name,
+                Created_At: dibs[0].Created_At
               });
             }
           } else {

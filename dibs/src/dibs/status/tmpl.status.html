@@ -4,3 +4,4 @@
 <small class="name" ng-if="$ctrl.dib.Full">{{$ctrl.dib.Name}}</small>
 <span class="description" ng-if="$ctrl.dib.Full === false">partially available</span>
 <span class="description" ng-if="!$ctrl.dib">available</span>
+<small class="timestamp" am-time-ago="$ctrl.dib.Created_At"></small>
