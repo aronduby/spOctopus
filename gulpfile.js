@@ -9,6 +9,8 @@
   var templateCache = require('gulp-angular-templatecache');
   var sass = require('gulp-sass');
   var mainBowerFiles = require('main-bower-files');
+  var del = require('del');
+  var zip = require('gulp-zip');
 
   var io = require('socket.io');
 
@@ -63,6 +65,33 @@
       .pipe(sass().on('error', sass.logError))
       .pipe(concat('app.css'))
       .pipe(gulp.dest('dibs/dist'));
+  });
+
+  gulp.task('clean:extension', function() {
+    return del([
+      'extension/**/*.*'
+    ]);
+  });
+
+  gulp.task('build:extension', ['clean:extension', 'bower', 'javascript', 'sass'], function() {
+    var manifest = require('./manifest.json');
+    var name = manifest.name;
+    var version = manifest.version;
+    var filename = [name, '-', version, '.zip'].join('');
+    
+    return gulp.src([
+      'dibs/dist/app.css',
+      'dibs/dist/app.js',
+      'dibs/dist/vendor.min.js',
+      'dibs/injector.js',
+      'dibs/loader.js',
+      'icons/**/*.*',
+      'matrix-scrolling/**/*.*',
+      'options/**/*.*',
+      'manifest.json'
+    ], {base: './'})
+      .pipe(zip(filename))
+      .pipe(gulp.dest('extension'));
   });
 
   gulp.task('watch', function() {
