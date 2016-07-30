@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "spOctopus",
   "short_name": "spOctopus",
-  "version": "0.9.1.0",
+  "version": "0.9.2.0",
   "options_ui": {
     "page": "options/options.html",
     "chrome_style": true

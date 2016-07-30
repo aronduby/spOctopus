@@ -22,13 +22,18 @@
       }
     }
 
-    function link() {
+    function link(scope) {
       var scrollSelector = '.dibs-environments-holder';
       $(document).on('mousewheel', scrollSelector, handleScroll);
       function handleScroll(e) {
         this.scrollLeft -= e.originalEvent.wheelDelta;
         e.preventDefault();
       }
+
+      $('#main-wrapper').addClass('has-dibs');
+      scope.$on('$destroy', function() {
+        $('#main-wrapper').removeClass('has-dibs');
+      });
     }
   }
 })();
